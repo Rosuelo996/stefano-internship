@@ -1,11 +1,100 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import AuthorImage from "../../images/author_thumbnail.jpg";
-import nftImage from "../../images/nftImage.jpg";
+import axios from "axios";
+import "slick-carousel/slick/slick.css";
+import Slider from "react-slick";
+import Skeleton from "../UI/Skeleton";
+import Card from "./NewItemsCard"
 
 const NewItems = () => {
+  const [newItems, setNewItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [slidesToShow, setSlidesToShow] = useState(4);
+
+  useEffect(() => {
+    const w = window.innerWidth;
+    if (w < 576) setSlidesToShow(1);
+    else if (w < 768) setSlidesToShow(2);
+    else if (w < 992) setSlidesToShow(3);
+    else setSlidesToShow(4);
+  }, []);
+
+  useEffect(() => {
+    async function getNewItems() {
+      setIsLoading(true);
+
+      try {
+        const { data } = await axios.get(
+          "https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems",
+        );
+        setNewItems(data);
+      } catch (error) {
+        console.error("Failed to fetch new items:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    getNewItems();
+  }, []);
+
+  function PrevArrow({ className, onClick }) {
+    return (
+      <button className={className} onClick={onClick}>
+        ‹
+      </button>
+    );
+  }
+
+  function NextArrow({ className, onClick }) {
+    return (
+      <button className={className} onClick={onClick}>
+        ›
+      </button>
+    );
+  }
+
+  const settings = {
+    dots: false,
+    arrows: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: slidesToShow,
+    slidesToScroll: 1,
+    prevArrow: <PrevArrow />,
+    nextArrow: <NextArrow />,
+    responsive: [
+      {
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 576,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
+  const skeletonArray = Array(slidesToShow).fill(0);
+  
+
+
+
   return (
-    <section id="section-items" className="no-bottom">
+    <section id="section-items" className="no-bottom new-items">
       <div className="container">
         <div className="row">
           <div className="col-lg-12">
@@ -14,62 +103,82 @@ const NewItems = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          {new Array(4).fill(0).map((_, index) => (
-            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={index}>
-              <div className="nft__item">
-                <div className="author_list_pp">
-                  <Link
-                    to="/author"
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="top"
-                    title="Creator: Monica Lucas"
-                  >
-                    <img className="lazy" src={AuthorImage} alt="" />
-                    <i className="fa fa-check"></i>
-                  </Link>
-                </div>
-                <div className="de_countdown">5h 30m 32s</div>
+          <Slider {...settings}>
+            {isLoading
+              ? skeletonArray.map((_, i) => (
+                  <div className="px-1 px-md-2" key={`skeleton-${i}`}>
+                    <div className="nft__item">
+                      <div className="author_list_pp">
+                        <Skeleton
+                          width="50px"
+                          height="50px"
+                          borderRadius="50%"
+                          style={{
+                            marginTop: "2px",
+                            position: "absolute",
+                          }}
+                        />
+                      </div>
+                      <Skeleton
+                        width="113px"
+                        height="32px"
+                        borderRadius="30px"
+                        style={{
+                          position: "absolute",
+                          right: "20px",
+                          padding: "1px 10px",
+                          zIndex: 100,
+                        }}
+                      />
 
-                <div className="nft__item_wrap">
-                  <div className="nft__item_extra">
-                    <div className="nft__item_buttons">
-                      <button>Buy Now</button>
-                      <div className="nft__item_share">
-                        <h4>Share</h4>
-                        <a href="" target="_blank" rel="noreferrer">
-                          <i className="fa fa-facebook fa-lg"></i>
-                        </a>
-                        <a href="" target="_blank" rel="noreferrer">
-                          <i className="fa fa-twitter fa-lg"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-envelope fa-lg"></i>
-                        </a>
+                      <div className="nft__item_wrap">
+                        <Skeleton
+                          width="100%"
+                          height="221px"
+                          borderRadius="8px"
+                        />
+                      </div>
+
+                      <div className="nft__item_info">
+                        <Skeleton
+                          width="50%"
+                          height="18px"
+                          borderRadius="4px"
+                          style={{
+                            display: "block",
+                            marginBottom: "5px"
+                          }}
+                        />
+                        <Skeleton
+                          width="30%"
+                          height="16px"
+                          borderRadius="4px"
+
+                        />
+
+                        <div
+                          className="nft__item_like"
+                          style={{
+                            
+                            bottom: "0", 
+                          }}
+                        >
+                          <i className="fa fa-heart"></i>
+                          <Skeleton
+                            width="18px"
+                            height="12px"
+                            borderRadius="4px"
+                            style={{ marginLeft: "6px" }}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
-
-                  <Link to="/item-details">
-                    <img
-                      src={nftImage}
-                      className="lazy nft__item_preview"
-                      alt=""
-                    />
-                  </Link>
-                </div>
-                <div className="nft__item_info">
-                  <Link to="/item-details">
-                    <h4>Pinky Ocean</h4>
-                  </Link>
-                  <div className="nft__item_price">3.08 ETH</div>
-                  <div className="nft__item_like">
-                    <i className="fa fa-heart"></i>
-                    <span>69</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+                ))
+              : newItems.map((item) => (
+                  <Card key={item.id} item={item} />
+                ))}
+          </Slider>
         </div>
       </div>
     </section>
