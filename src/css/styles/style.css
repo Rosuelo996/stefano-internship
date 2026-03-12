@@ -16773,3 +16773,27 @@ SKELETON LOADING - GLOBAL
   }
 }
 
+/* SKELETON  */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #E6E8EB 0%,
+    #E6E8EB 40%,
+    #F2F4F7 50%,
+    #E6E8EB 60%,
+    #E6E8EB 100%
+  );
+  background-size: 600% 100%;   
+  animation: skeleton-loading 2.2s linear infinite;
+  display: block;
+  will-change: background-position;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 120% 0;
+  }
+  100% {
+    background-position: -120% 0;
+  }
+}
