@@ -1,48 +1,10 @@
-import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import useCountdown from "../../hooks/useCountdown";
 
 const Card = ({ item }) => {
-  const [timer, setTimer] = useState();
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      updateTimer();
-    }, 1000);
-
-    function updateTimer() {
-      const currentTime = Date.now();
-      const expiryTime = item.expiryDate;
-      const millisLeft = expiryTime - currentTime;
-
-      if (millisLeft <= 0) {
-        setTimer(null);
-        clearInterval(interval);
-        return;
-      }
-
-      const secondsLeft = millisLeft / 1000;
-      const minutesLeft = secondsLeft / 60;
-      const hoursLeft = minutesLeft / 60;
-
-      const secondsText = Math.floor(secondsLeft) % 60;
-      const minutesText = Math.floor(minutesLeft) % 60;
-
-      const hours = Math.floor(hoursLeft);
-      const minutes = String(minutesText).padStart(2, "0");
-      const seconds = String(secondsText).padStart(2, "0");
-
-      const formatted = hours + "h " + minutes + "m " + seconds + "s";
-      setTimer(formatted);
-    }
-    updateTimer();
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [item.expiryDate]);
+  const timer = useCountdown(item.expiryDate)
 
   return (
-    <div className="px-1 px-md-2">
       <div className="nft__item">
         <div className="author_list_pp">
           <Link
@@ -95,7 +57,6 @@ const Card = ({ item }) => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

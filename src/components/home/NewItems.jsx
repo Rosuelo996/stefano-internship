@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import "slick-carousel/slick/slick.css";
 import Slider from "react-slick";
-import Skeleton from "../UI/Skeleton";
-import Card from "./NewItemsCard"
+import Card from "../UI/Card"
+import CardSkeleton from "../UI/CardSkeleton";
 
 const NewItems = () => {
   const [newItems, setNewItems] = useState([]);
@@ -91,8 +90,6 @@ const NewItems = () => {
   const skeletonArray = Array(slidesToShow).fill(0);
   
 
-
-
   return (
     <section id="section-items" className="no-bottom new-items">
       <div className="container">
@@ -107,79 +104,13 @@ const NewItems = () => {
             {isLoading
               ? skeletonArray.map((_, i) => (
                   <div className="px-1 px-md-2" key={`skeleton-${i}`}>
-                    <div className="nft__item">
-                      <div className="author_list_pp">
-                        <Skeleton
-                          width="50px"
-                          height="50px"
-                          borderRadius="50%"
-                          style={{
-                            marginTop: "2px",
-                            display:"flex",
-                            position: "relative",
-                          }}
-                        />
-                         <i className="fa fa-check"></i>
-                        
-                      </div>
-                      <Skeleton
-                        width="113px"
-                        height="32px"
-                        borderRadius="30px"
-                        style={{
-                          position: "absolute",
-                          right: "20px",
-                          padding: "1px 10px",
-                          zIndex: 100,
-                        }}
-                      />
-
-                      <div className="nft__item_wrap">
-                        <Skeleton
-                          width="100%"
-                          height="221px"
-                          borderRadius="8px"
-                        />
-                      </div>
-
-                      <div className="nft__item_info">
-                        <Skeleton
-                          width="50%"
-                          height="18px"
-                          borderRadius="4px"
-                          style={{
-                            display: "block",
-                            marginBottom: "5px"
-                          }}
-                        />
-                        <Skeleton
-                          width="30%"
-                          height="16px"
-                          borderRadius="4px"
-
-                        />
-
-                        <div
-                          className="nft__item_like"
-                          style={{
-                            
-                            bottom: "0", 
-                          }}
-                        >
-                          <i className="fa fa-heart"></i>
-                          <Skeleton
-                            width="18px"
-                            height="12px"
-                            borderRadius="4px"
-                            style={{ marginLeft: "6px" }}
-                          />
-                        </div>
-                      </div>
-                    </div>
+                    <CardSkeleton />
                   </div>
                 ))
               : newItems.map((item) => (
-                  <Card key={item.id} item={item} />
+                <div key={item.id} className="px-1 px-md-2">
+                  <Card item={item} />
+                  </div>
                 ))}
           </Slider>
         </div>
