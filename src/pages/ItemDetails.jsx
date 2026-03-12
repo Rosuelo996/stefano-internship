@@ -5,8 +5,8 @@ import axios from "axios";
 
 const ItemDetails = () => {
   const [items, setItems] = useState([])
+  const [sellers, setSellers] = useState([])
   const { id } = useParams()
-  const item = items.find((item) => +item.id === +id)
 
    useEffect(() => {
     window.scrollTo(0, 0);
@@ -14,13 +14,24 @@ const ItemDetails = () => {
 
   useEffect(() => {
     async function getItemDetails() {
-      const {data} = await axios.get("https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems")
-      setItems(data)
+
+      const [itemsRes, sellersRes] = await Promise.all([
+        axios.get("https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems"),
+        axios.get("https://us-central1-nft-cloud-functions.cloudfunctions.net/topSellers")
+      ])  
+
+      setItems(itemsRes.data)
+      setSellers(sellersRes.data)
     } 
     getItemDetails()
   },[])
 
+  const item = items.find((item) => item.id === Number(id))
   if (!item) return null
+
+  const seller = sellers.find((seller) => seller.authorId === item.authorId)
+  if (!seller) return null
+
 
   return (
     <div id="wrapper">
@@ -61,7 +72,7 @@ const ItemDetails = () => {
                       <div className="item_author">
                         <div className="author_list_pp">
                           <Link to="/author">
-                            <img className="lazy" src={item.authorImage} alt="" />
+                            <img className="lazy" src={EthImage} alt="" />
                             <i className="fa fa-check"></i>
                           </Link>
                         </div>
@@ -78,12 +89,12 @@ const ItemDetails = () => {
                       <div className="item_author">
                         <div className="author_list_pp">
                           <Link to="/author">
-                            <img className="lazy" src={item.authorImage} alt="" />
+                            <img className="lazy" src={seller.authorImage} alt="" />
                             <i className="fa fa-check"></i>
                           </Link>
                         </div>
                         <div className="author_list_info">
-                          <Link to="/author">Monica Lucas</Link>
+                          <Link to="/author">{seller.authorName}</Link>
                         </div>
                       </div>
                     </div>

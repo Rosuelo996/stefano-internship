@@ -115,9 +115,12 @@ const NewItems = () => {
                           borderRadius="50%"
                           style={{
                             marginTop: "2px",
-                            position: "absolute",
+                            display:"flex",
+                            position: "relative",
                           }}
                         />
+                         <i className="fa fa-check"></i>
+                        
                       </div>
                       <Skeleton
                         width="113px"

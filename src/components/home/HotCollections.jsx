@@ -122,6 +122,7 @@ const HotCollections = () => {
                           height="60px"
                           borderRadius="50%"
                         />
+                        <i className="fa fa-check"></i>
                       </div>
 
                       <div className="nft_coll_info">
