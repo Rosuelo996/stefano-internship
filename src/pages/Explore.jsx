@@ -58,7 +58,7 @@ const Explore = () => {
             <div className="container">
               <div className="row">
                 <div className="col-md-12 text-center">
-                  <h1>Explore</h1>
+                  <h1 data-aos="fade-in">Explore</h1>
                 </div>
                 <div className="clearfix"></div>
               </div>
@@ -68,7 +68,7 @@ const Explore = () => {
 
         <section aria-label="section">
           <div className="container">
-            <div className="row">
+            <div className="row" data-aos="fade-in">
               {isLoading ? (
                 skeletonArray.map((_, i) => (
                   <div

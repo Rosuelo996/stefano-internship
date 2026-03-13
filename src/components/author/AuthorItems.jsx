@@ -6,7 +6,7 @@ const AuthorItems = ({ author, collection, isLoading }) => {
 const skeletonArray = new Array(8).fill(0)
 
   return (
-    <div className="de_tab_content">
+    <div className="de_tab_content" data-aos="fade-in">
       <div className="tab-1">
         <div className="row">
           { isLoading 
