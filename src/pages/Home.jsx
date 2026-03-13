@@ -9,7 +9,6 @@ import TopSellers from "../components/home/TopSellers";
 const Home = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
-    // FROM MAIN DO NOT REMOVE
   }, []);
 
   return (
