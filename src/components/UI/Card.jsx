@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import useCountdown from "../../hooks/useCountdown";
 
-const Card = ({ item }) => {
+const Card = ({ item, author }) => {
   const timer = useCountdown(item.expiryDate)
 
   return (
@@ -13,12 +13,12 @@ const Card = ({ item }) => {
             data-bs-placement="top"
             title="Creator: Monica Lucas"
           >
-            <img className="lazy" src={item.authorImage} alt="" />
+            <img className="lazy" src={item.authorImage || author.authorImage} alt="" />
             <i className="fa fa-check"></i>
           </Link>
         </div>
-        {timer && <div className="de_countdown">{timer}</div>}
-
+        {item.expiryDate && <div className="de_countdown">{timer}</div>}
+  
         <div className="nft__item_wrap">
           <div className="nft__item_extra">
             <div className="nft__item_buttons">
