@@ -104,11 +104,11 @@ const NewItems = () => {
             {isLoading
               ? skeletonArray.map((_, i) => (
                   <div className="px-1 px-md-2" key={`skeleton-${i}`}>
-                    <CardSkeleton />
+                    <CardSkeleton showTimer={true}/>
                   </div>
                 ))
               : newItems.map((item) => (
-                <div key={item.id} className="px-1 px-md-2">
+                <div key={item.id} className="px-1 px-md-2" >
                   <Card item={item} />
                   </div>
                 ))}

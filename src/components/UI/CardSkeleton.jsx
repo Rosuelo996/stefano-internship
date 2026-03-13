@@ -1,6 +1,6 @@
 import Skeleton from "./Skeleton"
 
-const CardSkeleton = () => {
+const CardSkeleton = ({ showTimer }) => {
   return (
     <div className="nft__item">
                       <div className="author_list_pp">
@@ -17,7 +17,8 @@ const CardSkeleton = () => {
                          <i className="fa fa-check"></i>
                         
                       </div>
-                      <Skeleton
+                      {showTimer && (
+                        <Skeleton
                         width="113px"
                         height="32px"
                         borderRadius="30px"
@@ -28,6 +29,7 @@ const CardSkeleton = () => {
                           zIndex: 100,
                         }}
                       />
+                      )}
 
                       <div className="nft__item_wrap">
                         <Skeleton
@@ -51,7 +53,6 @@ const CardSkeleton = () => {
                           width="30%"
                           height="16px"
                           borderRadius="4px"
-
                         />
 
                         <div

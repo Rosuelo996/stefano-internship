@@ -12,7 +12,6 @@ const Explore = () => {
   const [filter, setFilter] = useState("")
   
 
-
   useEffect(() => {
     async function getExploreItems() {
       setIsLoading(true);
@@ -53,7 +52,7 @@ const Explore = () => {
         <section
           id="subheader"
           className="text-light"
-          style={{ background: `url("${SubHeader}") top` }}
+          style={{ background: `url("${SubHeader}") top`}}
         >
           <div className="center-y relative text-center">
             <div className="container">
@@ -77,7 +76,7 @@ const Explore = () => {
                     className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
                     style={{ display: "block", backgroundSize: "cover" }}
                   >
-                    <CardSkeleton />
+                    <CardSkeleton showTimer={true} />
                   </div>
                 ))
               ) : (
