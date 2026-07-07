@@ -1,41 +1,75 @@
 # Ultraverse
 
-Ultraverse is a responsive NFT marketplace web application built with React that allows users to explore NFT collections, discover sellers, track marketplace activity, and browse digital assets through an interactive user experience.
-
+Responsive NFT marketplace built with **React**.
 
 ## Live Demo
 
 https://stefano-ultraverse.vercel.app
 
+## Overview
+
+Ultraverse is a responsive NFT marketplace where users can explore NFT collections, discover sellers, browse digital assets, and track marketplace activity through an interactive user interface.
 
 ## Features
 
-* Browse and explore NFT collections
-* Filter NFTs dynamically by price
-* View seller and NFT detail pages
-* Interactive seller analytics and marketplace charts
-* API integration with asynchronous data fetching
-* React Slick carousel implementation
-* AOS scroll animations
-* Live countdown functionality
-* Fully responsive layout
+Explore NFT collections
+
+Filter NFTs by price
+
+View NFT details
+
+View NFT author profiles
+
+Interactive marketplace charts
+
+Featured NFT carousel
+
+Live countdown timers
+
+Responsive design for desktop and mobile
 
 
-## Tech Stack
+## Technologies
 
-* React
-* JavaScript
-* HTML5
-* CSS3
-* React Router
-* React Slick
-* AOS
-* REST API
-* Vercel
+**Frontend**
 
+React
 
-## What I Learned
+JavaScript
 
-This project helped me strengthen my understanding of building larger frontend applications with reusable components, API integration, dynamic rendering, filtering functionality, and creating interactive user experiences.
+HTML5
 
-I improved my ability to structure scalable frontend architecture, work with third-party libraries, manage asynchronous data flows, and build polished responsive interfaces.
+CSS3
+
+React Router
+
+React Slick
+
+AOS
+
+**API**
+
+REST API
+
+**Deployment**
+
+Vercel
+
+GitHub
+
+## Requirements
+
+Node.js 20+
+
+npm
+
+## Installation
+
+```bash
+git clone https://github.com/Rosuelo996/ultraverse.git
+cd ultraverse
+npm install
+npm run dev
+```
+
+Open **http://localhost:5173** in your browser.
